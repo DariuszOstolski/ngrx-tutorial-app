@@ -1,4 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { AuthSelectors } from './auth';
+import { AppState } from './reducers';
 
 @Component({
   selector: 'app-root',
@@ -6,15 +11,25 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  loading = true;
-  title = 'ngrx-app';
+  loading = false;
+  isLoggedIn: Observable<boolean>;
+  isLoggedOut: Observable<boolean>;
 
-  ngOnInit() {
+  title = 'ngrx-app';
+  private subscription: Subscription = Subscription.EMPTY;
+
+  constructor(private router: Router, private store: Store<AppState>) {
 
   }
 
-  ngOnDestroy() {
+  ngOnInit() {
+    /* tslint:disable:no-string-literal */
+    this.isLoggedIn = this.store.pipe(select(AuthSelectors.isLoggedIn));
+    this.isLoggedOut = this.store.pipe(select(AuthSelectors.isLoggedOut));
+  }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   logout() {
