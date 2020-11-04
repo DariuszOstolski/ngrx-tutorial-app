@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { AuthSelectors } from './auth';
+import { AuthActions, AuthSelectors } from './auth';
 import { AppState } from './reducers';
 
 @Component({
@@ -23,7 +23,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    /* tslint:disable:no-string-literal */
+    this.subscription = this.router.events.subscribe(event => {
+      console.log(event);
+    });
     this.isLoggedIn = this.store.pipe(select(AuthSelectors.isLoggedIn));
     this.isLoggedOut = this.store.pipe(select(AuthSelectors.isLoggedOut));
   }
@@ -33,6 +35,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-
+    this.store.dispatch(AuthActions.logout());
   }
 }
