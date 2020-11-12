@@ -23,9 +23,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.subscription = this.router.events.subscribe(event => {
-    //   console.log(event);
-    // });
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.store.dispatch(AuthActions.login({ user: JSON.parse(user) }));
+    }
     this.isLoggedIn = this.store.pipe(select(AuthSelectors.isLoggedIn));
     this.isLoggedOut = this.store.pipe(select(AuthSelectors.isLoggedOut));
   }
