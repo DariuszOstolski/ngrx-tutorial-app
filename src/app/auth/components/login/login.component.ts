@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { noop } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
-import { AppState } from '../../../reducers';
+import { AppState } from '../../../store';
 import { AuthActions } from '../../actions';
 
 @Component({

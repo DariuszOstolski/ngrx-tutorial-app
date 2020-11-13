@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { AuthActions, AuthSelectors } from './auth';
-import { AppState } from './reducers';
+import { AppState } from './store';
 
 @Component({
   selector: 'app-root',
