@@ -24,6 +24,18 @@ export class CoursesEffects {
     }
   );
 
+  saveCourse = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(CoursesActions.courseUpdated),
+        concatMap(action => {
+          return this.coursesService.saveCourse(action.update.id, action.update.changes);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
   constructor(private actions: Actions, private coursesService: CoursesService) {
   }
 

@@ -1,7 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Update } from '@ngrx/entity';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AppState } from 'src/app/store';
+import { courseUpdated } from '../../actions/courses.actions';
 import { Course } from '../../model';
 
 @Component({
@@ -19,7 +23,8 @@ export class EditCourseDialogComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditCourseDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data) {
+    @Inject(MAT_DIALOG_DATA) data,
+    private store: Store<AppState>) {
 
     this.dialogTitle = data.dialogTitle;
     this.course = data.course;
@@ -57,10 +62,18 @@ export class EditCourseDialogComponent implements OnInit {
       ...this.form.value
     };
 
+    const update: Update<Course> = {
+      id: course.id,
+      changes: course
+    };
+
+    this.store.dispatch(courseUpdated({ update: update }));
+
     if (this.mode == 'update') {
       this.dialogRef.close();
     } else if (this.mode == 'create') {
     }
+
   }
 
 }

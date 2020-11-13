@@ -1,3 +1,4 @@
+import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { Course } from '../model';
 
@@ -7,5 +8,10 @@ export const loadAllCourses = createAction(
 
 export const allCoursesLoaded = createAction(
   '[Load Couses Effect] All Courses Loaded',
-  props<{courses: Course[]}>()
+  props<{ courses: Course[] }>()
+);
+
+export const courseUpdated = createAction(
+  '[Edit Course Dialog] Course updated',
+  props<{ update: Update<Course> }>()
 );
