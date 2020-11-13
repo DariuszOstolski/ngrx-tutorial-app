@@ -24,6 +24,8 @@ import { EditCourseDialogComponent } from './components/edit-course-dialog/edit-
 import { CoursesCardListComponent } from './components/courses-card-list/courses-card-list.component';
 import { EffectsModule } from '@ngrx/effects';
 import { CoursesEffects } from './effects';
+import { StoreModule } from '@ngrx/store';
+import { coursesReducer } from './reducers';
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { CoursesEffects } from './effects';
     MatMomentDateModule,
     ReactiveFormsModule,
     CoursesRoutingModule,
+    StoreModule.forFeature('courses', coursesReducer),
     EffectsModule.forFeature([CoursesEffects])
   ]
 })
