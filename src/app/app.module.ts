@@ -20,7 +20,19 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 
 import { StoreModule } from './store';
+import { MatDialogConfig } from '@angular/material/dialog';
 
+export const editDialogConfig = {
+  position: { top: '143px' },
+  disableClose: true,
+  autoFocus: true,
+  width: '400px'
+};
+
+export const MAT_DIALOG_CONFIG_PROVIDER = {
+  provide: MatDialogConfig,
+  useValue: editDialogConfig
+};
 
 @NgModule({
   declarations: [
@@ -46,7 +58,9 @@ import { StoreModule } from './store';
     AuthModule,
     StoreModule
   ],
-  providers: [],
+  providers: [
+    MAT_DIALOG_CONFIG_PROVIDER
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
