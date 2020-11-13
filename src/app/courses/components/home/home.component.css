@@ -1,16 +1,25 @@
 
+#container {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.col-side {
+  flex: 1;
+  width: 20%;
+}
+
+.col { flex: 1; }
 
 .title {
   text-align: center;
   margin-right: 15px;
-
 }
 
 .courses-panel {
-  max-width: 350px;
   margin: 0 auto;
 }
-
 
 .counters {
   display: flex;
