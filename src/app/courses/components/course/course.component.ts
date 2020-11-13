@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Course, Lesson } from '../../model';
 
 @Component({
   selector: 'course',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseComponent implements OnInit {
 
-  constructor() { }
+  course$: Observable<Course>;
+  loading$: Observable<boolean>;
+  lessons$: Observable<Lesson[]>;
 
-  ngOnInit(): void {
+  displayedColumns = ['seqNo', 'description', 'duration'];
+
+  nextPage = 0;
+
+  constructor(private route: ActivatedRoute) {
   }
 
+  ngOnInit() {
+    const courseUrl = this.route.snapshot.paramMap.get('courseUrl');
+  }
+
+  loadLessonsPage(course: Course) {
+    this.nextPage += 1;
+  }
 }

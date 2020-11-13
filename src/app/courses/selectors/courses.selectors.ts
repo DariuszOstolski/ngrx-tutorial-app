@@ -21,3 +21,7 @@ export const selectPromoTotal = createSelector(selectAllCourses,
   }
 );
 
+export const selectAllCoursesLoaded = createSelector(
+  selectCoursesState,
+  state => state.allCoursesLoaded
+);

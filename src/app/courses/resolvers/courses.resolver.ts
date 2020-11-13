@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { finalize, first, tap } from 'rxjs/operators';
+import { filter, finalize, first, tap } from 'rxjs/operators';
 import { AppState } from '../../store';
 import { loadAllCourses } from '../actions/courses.actions';
+import { selectAllCoursesLoaded } from '../selectors/courses.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,14 @@ export class CoursesResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     return this.store.pipe(
-      tap(() => {
-        if (this.loading === false) {
+      select(selectAllCoursesLoaded),
+      tap((coursesLoaded: boolean) => {
+        if (this.loading === false && coursesLoaded === false) {
           this.loading = true;
           this.store.dispatch(loadAllCourses());
         }
       }),
+      filter(coursesLoaded => coursesLoaded),
       first(),
       finalize(() => {
         this.loading = false;

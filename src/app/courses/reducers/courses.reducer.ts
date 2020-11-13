@@ -1,21 +1,21 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { environment } from 'src/environments/environment';
 import { CoursesActions } from '../actions';
-import { Course } from '../model';
+import { compareCourses, Course } from '../model';
 
 
 export interface CoursesState extends EntityState<Course> {
+  allCoursesLoaded: boolean;
 }
 
-export const adapter = createEntityAdapter<Course>();
+export const adapter = createEntityAdapter<Course>({ sortComparer: compareCourses });
 
-export const initialCoursesState = adapter.getInitialState();
+export const initialCoursesState = adapter.getInitialState({ allCoursesLoaded: false });
 
 export const coursesReducer = createReducer(
   initialCoursesState,
   on(CoursesActions.allCoursesLoaded, (state, action) => {
-    return adapter.setAll(action.courses, state);
+    return adapter.setAll(action.courses, { ...state, allCoursesLoaded: true });
   }),
 );
 
