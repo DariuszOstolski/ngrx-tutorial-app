@@ -1,5 +1,6 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
+import { environment } from 'src/environments/environment';
 import { CoursesActions } from '../actions';
 import { Course } from '../model';
 
@@ -16,4 +17,7 @@ export const coursesReducer = createReducer(
   on(CoursesActions.allCoursesLoaded, (state, action) => {
     return adapter.setAll(action.courses, state);
   }),
-)
+);
+
+
+export const { selectAll } = adapter.getSelectors();
