@@ -13,7 +13,6 @@ export class CoursesResolver implements Resolve<any> {
 
   private loading: boolean = false;
   constructor(private store: Store<AppState>) {
-    
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
@@ -21,9 +20,8 @@ export class CoursesResolver implements Resolve<any> {
       tap(() => {
         if (this.loading === false) {
           this.loading = true;
-          this.store.dispatch(loadAllCourses());          
+          this.store.dispatch(loadAllCourses());
         }
-        
       }),
       first(),
       finalize(() => {

@@ -22,6 +22,8 @@ import { CoursesRoutingModule } from './courses-routing.module';
 import { CourseComponent } from './components/course/course.component';
 import { EditCourseDialogComponent } from './components/edit-course-dialog/edit-course-dialog.component';
 import { CoursesCardListComponent } from './components/courses-card-list/courses-card-list.component';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from './effects';
 
 
 @NgModule({
@@ -44,7 +46,7 @@ import { CoursesCardListComponent } from './components/courses-card-list/courses
     MatMomentDateModule,
     ReactiveFormsModule,
     CoursesRoutingModule,
-
+    EffectsModule.forFeature([CoursesEffects])
   ]
 })
 export class CoursesModule { }
