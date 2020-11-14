@@ -1,6 +1,6 @@
 # Ngrx-App
 
-This example project of ngrx Angular application based on following [Udemy course](https://www.udemy.com/share/1026ZIAkcaeVtTTHo=).
+This example project of ngrx Angular application based on following [Udemy course](https://www.udemy.com/course/ngrx-course/).
 
 ## Development server
 
