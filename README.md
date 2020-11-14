@@ -1,10 +1,11 @@
-# NgrxApp
+# Ngrx-App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.4.
+This example project of ngrx Angular application based on following [Udemy course](https://www.udemy.com/share/1026ZIAkcaeVtTTHo=).
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+You need to start a backend server which is located in this [repository](https://github.com/angular-university/ngrx-course)
 
 ## Code scaffolding
 
